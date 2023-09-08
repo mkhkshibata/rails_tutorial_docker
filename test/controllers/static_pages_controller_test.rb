@@ -7,31 +7,25 @@ class StaticPagesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "rootページのGETリクエストとタイトル表示のテスト" do
-    get root_url
-    assert_response :success
-    assert_select "title", "#{@base_title}"
-  end
-
-  test "homeページのGETリクエストとタイトル表示のテスト" do
-    get static_pages_home_url
+    get root_path
     assert_response :success
     assert_select "title", "#{@base_title}"
   end
 
   test "helpページのGETリクエストとタイトル表示のテスト" do
-    get static_pages_help_url
+    get help_path
     assert_response :success
     assert_select "title", "Help | #{@base_title}"
   end
 
   test "aboutページのGETリクエストとタイトル表示のテスト" do
-    get static_pages_about_url
+    get about_path
     assert_response :success
     assert_select "title", "About | #{@base_title}"
   end
 
   test "contactページのGETリクエストとタイトル表示のテスト" do
-    get static_pages_contact_url
+    get contact_path
     assert_response :success
     assert_select "title", "Contact | #{@base_title}"
   end
