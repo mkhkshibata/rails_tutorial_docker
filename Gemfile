@@ -16,6 +16,7 @@ gem "tzinfo-data", platforms: %i[ mingw mswin x64_mingw jruby ]
 gem "bootsnap", require: false
 gem "sassc-rails"
 gem "bootstrap-sass"
+gem "rails-i18n"
 
 group :development, :test do
   gem "pry-byebug"
