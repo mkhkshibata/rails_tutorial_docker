@@ -15,7 +15,7 @@ class UsersSignupTest < ActionDispatch::IntegrationTest
 
   test "新規登録が成功したときのテスト（データベースに1件登録されているか、リダイレクトしたときのリダイレクト先のテンプレート、flash表示がされるか（=空ではない））" do
     assert_difference "User.count", 1 do
-      post user_path, params:  { user: { name: "Example User", email: "user@example.com", password: "password", password_confirmation: "password"} }
+      post users_path, params:  { user: { name: "Example User", email: "user@example.com", password: "password", password_confirmation: "password"} }
     end
     follow_redirect!
     assert_template "users/show"
