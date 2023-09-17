@@ -1,4 +1,7 @@
 class User < ApplicationRecord
+	#仮想の属性を作成
+	attr_accessor :remember_token
+
 	# before_save { self.email = email.downcase }
 	before_save { email.downcase! }
 	validates :name, presence: true, length: { maximum: 50 }
@@ -7,9 +10,20 @@ class User < ApplicationRecord
 	has_secure_password
 	validates :password, presence: true, length: { minimum: 8 }
 
-
-	def User.digest(string)
+	#暗号化メソッド
+	def self.digest(string)
 		cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST : BCrypt::Engine.cost
 		BCrypt::Password.create(string, cost: cost)
+	end
+
+	#ランダムな文字列を返す
+	def self.new_token
+		SecureRandom.urlsafe_base64
+	end
+
+	#トークンを生成して、暗号化を行いパスワードなしでデータベースに保存する
+	def remember
+		self.remember_token = User.new_token
+		update_attribute(:remember_digest, User.digest(remember_token))
 	end
 end
