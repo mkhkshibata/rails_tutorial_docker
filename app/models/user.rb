@@ -10,7 +10,7 @@ class User < ApplicationRecord
 	has_secure_password
 	validates :password, presence: true, length: { minimum: 8 }
 
-	#暗号化メソッド
+	#暗号化するメソッド
 	def self.digest(string)
 		cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST : BCrypt::Engine.cost
 		BCrypt::Password.create(string, cost: cost)
@@ -25,5 +25,16 @@ class User < ApplicationRecord
 	def remember
 		self.remember_token = User.new_token
 		update_attribute(:remember_digest, User.digest(remember_token))
+	end
+
+	#暗号化して保存しているremember_digest属性の値とcookiesのトークンの値を比較
+	def authenticated?(remember_token)
+		return false if remember_digest.nil?
+		BCrypt::Password.new(remember_digest).is_password?(remember_token)
+	end
+
+	#ログイン情報破棄
+	def forget
+		update_attribute(:remember_digest, nil)
 	end
 end
