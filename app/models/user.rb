@@ -25,6 +25,13 @@ class User < ApplicationRecord
 	def remember
 		self.remember_token = User.new_token
 		update_attribute(:remember_digest, User.digest(remember_token))
+		#remember_digestを返す（暗号化済み）
+		remember_digest
+	end
+
+	#remember_digestをsession_tokenとして再利用
+	def session_token
+		remember_digest || remember
 	end
 
 	#暗号化して保存しているremember_digest属性の値とcookiesのトークンの値を比較

@@ -1,8 +1,9 @@
 module SessionsHelper
 
-	#sessionメソッドを用いてブラウザに暗号化したユーザーIDを持たせる
+	#sessionメソッドを用いてブラウザに暗号化したユーザーID、session_tokenを作成し格納する
 	def log_in(user)
 		session[:user_id] = user.id
+		session[:session_token] = user.session_token
 	end
 
 	def remember(user)
@@ -18,7 +19,10 @@ module SessionsHelper
 	def current_user
 		#sessionを保持していたら格納しているユーザーIDから取得
 		if (user_id = session[:user_id])
-			@current_user ||= User.find_by(id: user_id)
+			user = User.find_by(id: user_id)
+			if user && session[:session_token] == user.session_token
+				@current_user = user
+			end
 		#ブラウザにcookieが格納されていたら
 		elsif (user_id = cookies.encrypted[:user_id])
 			user = User.find_by(id: user_id)
