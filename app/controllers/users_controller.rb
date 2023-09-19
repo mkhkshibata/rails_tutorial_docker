@@ -20,6 +20,20 @@ class UsersController < ApplicationController
     end
   end
 
+  def edit
+    @user = User.find_by(id: params[:id])
+  end
+
+  def update
+    @user = User.find_by(id: params[:id])
+    if @user.update(user_params)
+      flash[:success] = "変更しました"
+      redirect_to @user
+    else
+      render 'new', status: :unprocessable_entity
+    end
+  end
+
   private
 
     def user_params
