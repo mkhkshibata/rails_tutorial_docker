@@ -34,6 +34,11 @@ module SessionsHelper
 		end
 	end
 
+	#渡されたユーザーが現在ログイン中のユーザーか確認する
+	def current_user?(user)
+		user && user == current_user
+	end
+
 	#ログイン中ならtrueを返す
 	def logged_in?
 		!current_user.nil?
@@ -53,4 +58,8 @@ module SessionsHelper
 		@current_user = nil
 	end
 
+	#ログイン前にGETリクエストしようとしたURLを保存する
+	def store_location
+		session[:forwarding_url] = request.original_url if request.get?
+	end
 end
