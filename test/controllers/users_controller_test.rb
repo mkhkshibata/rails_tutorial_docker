@@ -32,4 +32,9 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
     assert flash.empty?
     assert_redirected_to root_url
   end
+
+  test "ログインせずにユーザー一覧ページにアクセスするとログインページへリダイレクトされる" do
+    get users_path
+    assert_redirected_to login_url
+  end
 end
