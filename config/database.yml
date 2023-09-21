@@ -84,7 +84,7 @@ test:
 #
 production:
   <<: *default
-  database: rails_tutorial_docker
+  database: rails_tutorial_docker_production
   username: rails_tutorial_docker
   password: <%= ENV["RAILS_TUTORIAL_DOCKER_DATABASE_PASSWORD"] %>
   url: <%= ENV["RAILS_TUTORIAL_DOCKER_DATABASE_URL"] %>
