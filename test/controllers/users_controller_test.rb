@@ -37,4 +37,34 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
     get users_path
     assert_redirected_to login_url
   end
+
+  test "ログインしていない時、ユーザー情報の変更はできない（リダイレクトされる）" do
+    patch user_path(@user), params: { user: { name: @user.name, email: @user.email } }
+    assert_not flash.empty?
+    assert_redirected_to login_url
+  end
+
+  test "管理者ユーザーでない場合、ユーザー情報の変更はできない" do
+    log_in_as(@other_user)
+    assert_not @other_user.admin?
+    patch user_path(@user), params: { user: { password: "password", password_confirmation: "password", admin: true } }
+    assert_not @other_user.reload.admin?
+  end
+
+  test "ログインしていないとき、ユーザーの削除はできない（see_otherレスポンスが返され、リダイレクトされる）" do
+    assert_no_difference 'User.count' do
+      delete user_path(@user)
+    end
+    assert_response :see_other
+    assert_redirected_to login_url
+  end
+
+  test "ログインしているが管理者ユーザーでないとき、ユーザーの削除はできない（see_otherレスポンスが返され、リダイレクトされる）" do
+    log_in_as(@other_user)
+    assert_no_difference 'User.count' do
+      delete user_path(@user)
+    end
+    assert_response :see_other
+    assert_redirected_to root_url
+  end
 end
