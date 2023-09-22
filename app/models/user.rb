@@ -1,9 +1,12 @@
 class User < ApplicationRecord
 	#仮想の属性を作成
-	attr_accessor :remember_token
+	attr_accessor :remember_token, :activation_token
 
 	# before_save { self.email = email.downcase }
-	before_save { email.downcase! }
+	# before_save { email.downcase! }
+	before_save :downcase_email
+	# ユーザーが新規登録した際に処理される
+	before_create :create_activation_digest
 	validates :name, presence: true, length: { maximum: 50 }
 	VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i
 	validates :email, presence: true, length: { maximum: 255 }, format: { with: VALID_EMAIL_REGEX }, uniqueness: true
@@ -43,5 +46,15 @@ class User < ApplicationRecord
 	#ログイン情報破棄
 	def forget
 		update_attribute(:remember_digest, nil)
+	end
+
+	def downcase_email
+		self.email = email.downcase
+	end
+
+	# メールリンク有効化トークン、ダイジェストを作成
+	def create_activation_digest
+		self.activation_token = User.new_token
+		self.activation_digest = User.digest(activation_token)
 	end
 end
