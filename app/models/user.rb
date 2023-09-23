@@ -38,9 +38,17 @@ class User < ApplicationRecord
 	end
 
 	#暗号化して保存しているremember_digest属性の値とcookiesのトークンの値を比較
-	def authenticated?(remember_token)
-		return false if remember_digest.nil?
-		BCrypt::Password.new(remember_digest).is_password?(remember_token)
+	# def authenticated?(remember_token)
+	# 	return false if remember_digest.nil?
+	# 	BCrypt::Password.new(remember_digest).is_password?(remember_token)
+	# end
+
+	#暗号化して保存した属性と元になったトークンを比較するメソッドを汎用化
+	def authenticated?(attribute, token)
+		#メソッドが格納される
+		digest = self.send("#{attribute}_digest")
+		return false if digest.nil?
+		BCrypt::Password.new(digest).is_password?(token)
 	end
 
 	#ログイン情報破棄
@@ -48,13 +56,25 @@ class User < ApplicationRecord
 		update_attribute(:remember_digest, nil)
 	end
 
-	def downcase_email
-		self.email = email.downcase
-	end
+	def activate
+    update_attribute(:activated, true)
+    update_attribute(:activated_at, Time.zone.now)
+		# update_columns(activated: true, activated_at: Time.zone.now)
+  end
 
-	# メールリンク有効化トークン、ダイジェストを作成
-	def create_activation_digest
-		self.activation_token = User.new_token
-		self.activation_digest = User.digest(activation_token)
-	end
+  def send_activation_email
+    UserMailer.account_activation(self).deliver_now
+  end
+
+	private
+
+		def downcase_email
+			self.email = email.downcase
+		end
+
+		# メールリンク有効化トークン、ダイジェストを作成
+		def create_activation_digest
+			self.activation_token = User.new_token
+			self.activation_digest = User.digest(activation_token)
+		end
 end

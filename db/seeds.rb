@@ -20,7 +20,7 @@ User.create(name: "サンプルユーザー",
 	email = "example-#{n + 1}@railstutorial.org"
 	password = "password"
 	User.create!(name: name,
-								mail: email,
+								email: email,
 								password: password,
 								password_confirmation: password,
 								activated: true,

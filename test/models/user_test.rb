@@ -72,7 +72,7 @@ class UserTest < ActiveSupport::TestCase
   end
 
   test "データベースにremember_digest属性がない場合、authenticated?がfalseを返す" do
-    assert_not @user.authenticated?('')
+    assert_not @user.authenticated?(:remember, '')
   end
 
 end

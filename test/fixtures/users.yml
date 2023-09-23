@@ -6,6 +6,13 @@ micheal:
   activated: true
   activated_at: <%= Time.zone.now %>
 
+inactive:
+  name: 非アクティブユーザー
+  email: inactive@example.com
+  password_digest: <%= User.digest('password') %>
+  activated: false
+  activated_at: <%= Time.zone.now %>
+
 archer:
   name: アーチャー
   email: archer@example.com
