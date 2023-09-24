@@ -27,3 +27,11 @@ User.create(name: "サンプルユーザー",
 								activated_at: Time.zone.now)
 
 end
+
+User.create(name: "test05",
+	email: "test05@test.jp",
+	password: "asdfasdf",
+	password_confirmation: "asdfasdf",
+	admin: true,
+	activated: true,
+	activated_at: Time.zone.now)
