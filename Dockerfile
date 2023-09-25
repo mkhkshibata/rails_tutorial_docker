@@ -1,4 +1,5 @@
 FROM ruby:3.2.2
+ENV RAILS_ENV="production"
 RUN apt-get update -qq && apt-get install -y build-essential nodejs postgresql-client
 RUN mkdir /rails_tutorial_docker
 WORKDIR /rails_tutorial_docker
