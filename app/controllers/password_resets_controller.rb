@@ -11,8 +11,6 @@ class PasswordResetsController < ApplicationController
     if @user
       @user.create_reset_digest
       @user.send_password_reset_email
-      binding.pry
-
       flash[:info] = "メールを送信しました"
       redirect_to root_url
     else
@@ -30,9 +28,10 @@ class PasswordResetsController < ApplicationController
       @user.errors.add(:password, "を入力してください")
       render 'edit', status: :unprocessable_entity
     elsif @user.update(user_params)
-      @user.forget
+      forget @user
       reset_session
       log_in @user
+      @user.update_attribute(:reset_digest, nil)
       flash[:success] = "パスワードを更新しました"
       redirect_to @user
     else

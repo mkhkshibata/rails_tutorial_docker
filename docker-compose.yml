@@ -3,7 +3,8 @@ services:
   web:
     build:
       context: .
-    command: "bundle exec rails s -e production"
+      dockerfile: Dockerfile
+    command: bundle exec rails s -e production
     volumes:
       - .:/rails_tutorial_docker
     tty: true
