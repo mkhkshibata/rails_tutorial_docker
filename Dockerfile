@@ -13,5 +13,3 @@ RUN chmod +x /usr/bin/entrypoint.sh
 ENTRYPOINT ["entrypoint.sh"]
 EXPOSE 3000
 
-# イメージ実行時に起動させる主プロセスを設定
-CMD ["rails", "server", "-b", "0.0.0.0"]
