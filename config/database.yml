@@ -86,6 +86,6 @@ production:
   <<: *default
   database: rails_tutorial_docker_production
   username: rails_tutorial_docker_production_user
-  password: <%= ENV["RAILS_TUTORIAL_DOCKER_DATABASE_PASSWORD"] %>
+  password: <%= ENV["RAILS_TUTORIAL_DOCKER_PASSWORD"] %>
   url: <%= ENV["RAILS_TUTORIAL_DOCKER_DATABASE_URL"] %>
   host: dpg-cjrf8fu1208c7384s710-a
