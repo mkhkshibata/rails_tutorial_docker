@@ -9,8 +9,6 @@ services:
       - .:/rails_tutorial_docker
     tty: true
     stdin_open: true
-    environment:
-      RAILS_ENV: production
 
 volumes:
   db-volume:
