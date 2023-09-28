@@ -11,11 +11,6 @@ services:
     stdin_open: true
     environment:
       RAILS_ENV: production
-  db:
-    environment:
-      POSTGRES_USER: rails_tutorial_docker_production_user
-      POSTGRES_PASSWORD: <%= ENV["RAILS_TUTORIAL_DOCKER_DATABASE_PASSWORD"] %>
-    restart: always
 
 volumes:
   db-volume:

@@ -15,4 +15,5 @@ ENTRYPOINT ["entrypoint.sh"]
 EXPOSE 3000
 
 # イメージ実行時に起動させる主プロセスを設定
-# CMD ["rails", "server", "-b", "0.0.0.0"]
+CMD ["rails", "server", "-b", "0.0.0.0", "-e", "production"]
+# CMD ["bundle", "exec", "puma", "-C", "config/puma.rb"]
