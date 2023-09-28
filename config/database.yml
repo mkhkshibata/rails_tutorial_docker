@@ -88,4 +88,4 @@ production:
   username: rails_tutorial_docker_production_user
   password: <%= ENV["RAILS_TUTORIAL_DOCKER_DATABASE_PASSWORD"] %>
   url: <%= ENV["RAILS_TUTORIAL_DOCKER_DATABASE_URL"] %>
-  hostname: <%= ENV["RAILS_TUTORIAL_DOCKER_DATABASE_HOSTNAME"] %>
+  hostname: dpg-cjrf8fu1208c7384s710-a
