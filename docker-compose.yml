@@ -4,13 +4,18 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    command: bundle exec puma -C config/puma.rb -e production
+    command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0' -e production"
     volumes:
       - .:/rails_tutorial_docker
     tty: true
     stdin_open: true
     environment:
       RAILS_ENV: production
+  db:
+    environment:
+      POSTGRES_USER: rails_tutorial_docker_production_user
+      POSTGRES_PASSWORD: <%= ENV["RAILS_TUTORIAL_DOCKER_DATABASE_PASSWORD"] %>
+    restart: always
 
 volumes:
   db-volume:
