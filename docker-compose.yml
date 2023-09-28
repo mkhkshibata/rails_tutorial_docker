@@ -4,7 +4,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -b '0.0.0.0' -e production"
+    command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -e production -b '0.0.0.0'"
     volumes:
       - .:/rails_tutorial_docker
     tty: true
