@@ -9,6 +9,7 @@ services:
       - .:/rails_tutorial_docker
     tty: true
     stdin_open: true
+    restart: always
 
 volumes:
   db-volume:
