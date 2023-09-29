@@ -10,8 +10,8 @@ RUN bundle install
 RUN bundle exec rails db:create
 RUN bundle exec rails db:migrate:reset
 RUN bundle exec rails db:seed
-RUN bundle exec rails assets:clean
-RUN bundle exec rails assets:precompile
+# RUN bundle exec rails assets:clean
+# RUN bundle exec rails assets:precompile
 COPY . /rails_tutorial_docker
 
 # コンテナー起動時に毎回実行されるスクリプトを追加
