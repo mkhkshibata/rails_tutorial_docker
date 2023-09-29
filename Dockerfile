@@ -7,6 +7,8 @@ COPY Gemfile.lock /rails_tutorial_docker/Gemfile.lock
 
 ENV RAILS_ENV="production"
 RUN bundle install
+RUN bundle exec rails assets:clean
+RUN bundle exec rails assets:precompile
 RUN bundle exec rails db:migrate:reset
 RUN bundle exec rails db:seed
 COPY . /rails_tutorial_docker
@@ -19,3 +21,4 @@ EXPOSE 3000
 
 # イメージ実行時に起動させる主プロセスを設定
 CMD ["rails", "server", "-e", "production", "-b", "0.0.0.0"]
+# CMD ["bundle", "exec", "puma", "-C", "config/puma.rb"]
