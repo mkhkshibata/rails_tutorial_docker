@@ -4,11 +4,13 @@ RUN mkdir /rails_tutorial_docker
 WORKDIR /rails_tutorial_docker
 COPY Gemfile /rails_tutorial_docker/Gemfile
 COPY Gemfile.lock /rails_tutorial_docker/Gemfile.lock
+
 ENV RAILS_ENV="production"
 RUN bundle install
 RUN bundle exec rails db:create
 RUN bundle exec rails db:migrate:reset
 RUN bundle exec rails db:seed
+RUN bundle exec rails assets:clean
 RUN bundle exec rails assets:precompile
 COPY . /rails_tutorial_docker
 
