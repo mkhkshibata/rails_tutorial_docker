@@ -5,6 +5,7 @@ set -e
 rm -f /rails_tutorial_docker/tmp/pids/server.pid
 bundle exec rails assets:clean
 bundle exec rails assets:precompile
+RUN bundle exec rails db:migrate:reset
 bundle exec rails db:seed
 
 # コンテナーのプロセスを実行する。（Dockerfile 内の CMD に設定されているもの。）

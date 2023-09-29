@@ -8,7 +8,7 @@ COPY Gemfile.lock /rails_tutorial_docker/Gemfile.lock
 ENV RAILS_ENV="production"
 RUN bundle install
 
-RUN bundle exec rails db:migrate:reset
+# RUN bundle exec rails db:migrate:reset
 # RUN bundle exec rails db:seed
 COPY . /rails_tutorial_docker
 
