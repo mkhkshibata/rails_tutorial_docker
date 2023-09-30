@@ -9,7 +9,7 @@ RAILS_ENV=production DISABLE_DATABASE_ENVIRONMENT_CHECK=1 bundle exec rails db:d
 bundle exec rails db:create RAILS_ENV=production
 bundle exec rails db:migrate RAILS_ENV=production
 # bundle exec rails db:seed RAILS_ENV=production
-# bundle exec rake db:seed
+bundle exec rake db:seed
 # DISABLE_DATABASE_ENVIRONMENT_CHECK=1 bundle exec rake db:migrate:reset && rake db:seed
 
 # コンテナーのプロセスを実行する。（Dockerfile 内の CMD に設定されているもの。）
