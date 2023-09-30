@@ -8,8 +8,8 @@ COPY Gemfile.lock /rails_tutorial_docker/Gemfile.lock
 ENV RAILS_ENV="production"
 RUN bundle install
 RUN bundle exec rails db:reset RAILS_ENV=production
-RUN bundle exec rails db:migrate RAILS_ENV=production
-RUN bundle exec rails db:seed RAILS_ENV=production
+# RUN bundle exec rails db:migrate RAILS_ENV=production
+# RUN bundle exec rails db:seed RAILS_ENV=production
 COPY . /rails_tutorial_docker
 
 # コンテナー起動時に毎回実行されるスクリプトを追加
