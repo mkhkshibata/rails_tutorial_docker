@@ -20,7 +20,7 @@ RUN chmod +x /usr/bin/entrypoint.sh
 ENTRYPOINT ["entrypoint.sh"]
 EXPOSE 3000
 
-RUN bundle exec rails db:seed RAILS_ENV=production
+RUN bundle exec rake db:seed RAILS_ENV=production
 
 # イメージ実行時に起動させる主プロセスを設定
 CMD ["rails", "server", "-e", "production", "-b", "0.0.0.0"]
