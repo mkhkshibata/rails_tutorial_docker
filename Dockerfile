@@ -20,8 +20,6 @@ RUN chmod +x /usr/bin/entrypoint.sh
 ENTRYPOINT ["entrypoint.sh"]
 EXPOSE 3000
 
-RUN DISABLE_DATABASE_ENVIRONMENT_CHECK=1 bundle exec rake db:seed RAILS_ENV=production
-
 # イメージ実行時に起動させる主プロセスを設定
 CMD ["rails", "server", "-e", "production", "-b", "0.0.0.0"]
 # CMD ["bundle", "exec", "puma", "-C", "config/puma.rb"]
