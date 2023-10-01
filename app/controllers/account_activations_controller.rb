@@ -5,7 +5,7 @@ class AccountActivationsController < ApplicationController
 		user = User.find_by(email: params[:email])
 		# if user && !user.activated? && user.authenticated?(:activation, params[:id])
 		if user && !user.activated? && user.authenticated?(:activation, params[:id])
-			# user.activate
+			user.activate
 			log_in(user)
 			flash[:success] = "アカウントが有効になりました"
 			redirect_to user
