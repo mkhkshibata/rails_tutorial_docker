@@ -11,6 +11,7 @@ class AccountActivationsController < ApplicationController
 			logger.debug("test")
 			redirect_to user
 		else
+			logger.debug("test mukou")
 			flash[:danger] = "無効なリンクです"
 			redirect_to root_url
 		end
