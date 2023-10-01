@@ -4,7 +4,8 @@ class AccountActivationsController < ApplicationController
 	def edit
 		user = User.find_by(email: params[:email])
 		# if user && !user.activated? && user.authenticated?(:activation, params[:id])
-		if user && (user.activated? == false) && user.authenticated?(:activation, params[:id])
+		res = user.authenticated?(:activation, params[:id])
+		if user && !user.activated? && res
 			user.activate
 			log_in(user)
 			flash[:success] = "アカウントが有効になりました"
