@@ -8,6 +8,7 @@ class AccountActivationsController < ApplicationController
 			user.activate
 			log_in(user)
 			flash[:success] = "アカウントが有効になりました"
+			logger.debug("test")
 			redirect_to user
 		else
 			flash[:danger] = "無効なリンクです"
