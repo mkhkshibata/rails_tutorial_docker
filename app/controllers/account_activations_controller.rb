@@ -9,9 +9,9 @@ class AccountActivationsController < ApplicationController
 			log_in(user)
 			flash[:success] = "アカウントが有効になりました"
 			redirect_to user
-		# else
-		# 	flash[:danger] = "無効なリンクです"
-		# 	redirect_to root_url
+		else
+			flash[:danger] = "無効なリンクです"
+			redirect_to root_url
 		end
 	end
 end
