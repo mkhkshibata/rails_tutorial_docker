@@ -1,4 +1,7 @@
 class User < ApplicationRecord
+	#モデルの関連付け
+	has_many :microposts, dependent: :destroy
+
 	#仮想の属性を作成
 	attr_accessor :remember_token, :activation_token, :reset_token
 
