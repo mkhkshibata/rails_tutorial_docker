@@ -8,6 +8,7 @@ ja:
         password_confirmation: パスワード確認
       micropost:
         content: 投稿
+        image: 画像
   will_paginate:
     previous_label: ⇦前
     next_label: 次→

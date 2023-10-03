@@ -4,4 +4,7 @@
 		<%= f.text_area :content, placeholder: "投稿してください" %>
 	</div>
 	<%= f.submit "投稿する", class: "btn btn-primary" %>
+	<span class="imag">
+		<%= f.file_field :image, accept: "image/jpeg, image/gif. image/png" %>
+	</span>
 <% end %>

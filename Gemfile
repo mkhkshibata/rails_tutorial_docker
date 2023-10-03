@@ -20,6 +20,8 @@ gem "bootsnap", require: false
 gem "sassc-rails"
 gem "bootstrap-sass"
 gem "rails-i18n"
+gem "active_storage_validations"
+gem "image_processing"
 
 group :development, :test do
   gem "pry-byebug"
