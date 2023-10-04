@@ -82,4 +82,18 @@ class UserTest < ActiveSupport::TestCase
       @user.destroy
     end
   end
+
+  test "ユーザーをフォローしフォロー解除を行うテスト" do
+    micheal = users(:micheal)
+    archer = users(:archer)
+    assert_not micheal.following?(archer)
+    micheal.follow(archer)
+    assert micheal.following?(archer)
+    assert archer.followers.include?(micheal)
+    micheal.unfollow(archer)
+    assert_not micheal.following?(archer)
+    #自分自身をフォローできない
+    micheal.follow(micheal)
+    assert_not micheal.following?(micheal)
+  end
 end
