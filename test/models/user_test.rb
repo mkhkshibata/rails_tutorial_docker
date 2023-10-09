@@ -96,4 +96,23 @@ class UserTest < ActiveSupport::TestCase
     micheal.follow(micheal)
     assert_not micheal.following?(micheal)
   end
+
+  test "正しい投稿がフィードされているかのテスト" do
+    micheal = users(:micheal)
+    archer = users(:archer)
+    lana = users(:lana)
+    #フォローしているユーザー（lana）の投稿を確認
+    lana.microposts.each do |post_following|
+      assert micheal.feed.include?(post_following)
+    end
+    #フォロワーがいるユーザー自身（micheal）の投稿を確認
+    micheal.microposts.each do |post_self|
+      assert micheal.feed.include?(post_self)
+      assert_equal micheal.feed.distinct, micheal.feed
+    end
+    #フォローしていないユーザー（archer）の投稿を確認
+    archer.microposts.each do |post_unfollowed|
+      assert_not micheal.feed.include?(post_unfollowed)
+    end
+  end
 end
